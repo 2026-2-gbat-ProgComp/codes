@@ -1,6 +1,6 @@
 """
   IFRN/CNAT
-  Prof Galileu Batista
+  Prof Galileu Batista.
   Ago/2026
   Cédulas a dispensar para um saque em ATM
 """
