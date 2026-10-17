@@ -9,7 +9,7 @@
         - Qual a menor e a maior data/hora registrada no arquivo?
         - Quais as acoes foram tomadas pelo firewall?
         - Quantas acoes de cada tipo existem?
-        - Existe comunicacao partindo do IP 192.168.1?
+        - Existe comunicacao partindo do IP 192.168.1.30?
         - Qual o par de IPs que mais se comunicou?
 """
 
@@ -64,11 +64,11 @@ logs= """2025-10-30 08:15:23,192.168.1.100,142.250.80.14,443,HTTPS,ALLOW
 2025-10-30 09:03:27,192.168.1.110,45.33.32.156,23,TELNET,BLOCK
 2025-10-30 09:04:41,192.168.1.100,93.184.216.34,80,HTTP,ALLOW
 2025-10-30 09:05:18,192.168.1.180,198.18.0.55,3389,RDP,BLOCK
-2025-10-30 09:06:33,192.168.1.108,142.250.185.46,443,HTTPS,ALLOW
+2025-10-30 09:06:33,192.168.1.108,142.250.185.46,443,HTTPS,DENY
 2025-10-30 09:07:55,192.168.1.115,203.45.12.88,445,SMB,BLOCK
 2025-10-30 09:08:22,192.168.1.102,8.8.8.8,53,DNS,ALLOW
 2025-10-30 09:09:44,192.168.1.185,45.33.32.156,5432,POSTGRES,BLOCK
-2025-10-30 09:10:17,192.168.1.100,151.101.1.69,443,HTTPS,ALLOW
+2025-10-30 09:10:17,192.168.1.100,151.101.1.69,443,HTTPS,REJECT
 2025-10-30 09:11:33,192.168.1.105,74.125.224.72,80,HTTP,ALLOW
 2025-10-30 09:12:48,192.168.1.190,185.220.101.45,6379,REDIS,BLOCK
 2025-10-30 09:13:25,192.168.1.108,172.217.30.46,443,HTTPS,ALLOW
@@ -80,7 +80,7 @@ logs= """2025-10-30 08:15:23,192.168.1.100,142.250.80.14,443,HTTPS,ALLOW
 2025-10-30 09:19:44,192.168.1.105,8.8.4.4,53,DNS,ALLOW
 2025-10-30 09:20:18,192.168.1.200,203.45.12.88,21,FTP,BLOCK
 2025-10-30 09:21:35,192.168.1.100,142.250.185.46,443,HTTPS,ALLOW
-2025-11-34 09:22:52,192.168.1.108,151.101.1.69,80,HTTP,ALLOW
+2025-11-14 09:22:52,192.168.1.108,151.101.1.69,80,HTTP,ALLOW
 2025-10-30 09:23:27,192.168.1.115,185.220.101.45,22,SSH,BLOCK
 2025-10-30 09:24:44,192.168.1.100,172.217.30.46,443,HTTPS,ALLOW
 2025-10-30 09:25:18,192.168.1.125,45.33.32.156,161,SNMP,BLOCK
@@ -109,6 +109,24 @@ logs= """2025-10-30 08:15:23,192.168.1.100,142.250.80.14,443,HTTPS,ALLOW
 2025-10-30 09:48:27,192.168.1.100,8.8.8.8,53,DNS,ALLOW
 2025-10-30 09:49:44,192.168.1.108,142.250.185.46,80,HTTP,ALLOW
 2025-10-30 09:50:18,192.168.1.185,198.18.0.55,3389,RDP,BLOCK
-2025-10-30 09:51:35,192.168.1.100,74.125.224.72,443,HTTPS,ALLOW
-"""
+2025-10-30 09:51:35,192.168.1.100,74.125.224.72,443,HTTPS,ALLOW"""
 
+data_hora = []
+acoes = []
+qtde_acoes = []
+
+for log in logs.split("\n"):
+    campos = log.split(",")
+    data_hora.append(campos[0])
+    
+    if not (campos[5] in acoes):
+        acoes.append(campos[5])
+        qtde_acoes.append(1)
+    else:
+        pos_acao = acoes.index(campos[5])
+        qtde_acoes[pos_acao] += 1
+                
+print (f"Menor hora {min(data_hora)}")
+print (f"Maior hora {max(data_hora)}")
+print (f"Acoes {acoes}")
+print (f"Acoes {qtde_acoes}")
