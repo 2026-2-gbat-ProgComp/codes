@@ -5,3 +5,7 @@ lst_populacao = [3365351, 14985284, 9240580, 7153262, 9674793, 3289290, 3560903,
 # Inserir os dados da Paraíba na posição 4 das respectivas listas
 # Paraíba / PB / 4059905
 
+lst_uf.insert(4, "Paraíba")
+lst_siglas.insert(4, "PB")
+lst_populacao.insert(4, 4059905)
+print (lst_uf, lst_siglas, lst_populacao)

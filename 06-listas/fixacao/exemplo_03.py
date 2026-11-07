@@ -7,3 +7,10 @@ lst_populacao = [3365351, 14985284, 9240580, 7153262, 4059905, 9674793, 3289290,
 
 # E no final imprimir a seguinte informação:
 # 'O Nordeste possui um total de (QUANTIDADE TOTAL) habitantes'
+
+total = 0
+for pos, _ in enumerate(lst_uf):
+    print (f'O estado {lst_uf[pos]} ({lst_siglas[pos]}) possui ({lst_populacao[pos]}) habitantes')
+    total += lst_populacao[pos]
+
+print(f'O Nordeste possui um total de {sum(lst_populacao)} habitantes')
